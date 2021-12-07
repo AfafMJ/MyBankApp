@@ -156,5 +156,16 @@ class MainActivity : AppCompatActivity() {
         ed.putFloat("myBalance", balanceAmount)
         ed.commit()
     }
+    override fun onPause() {
+        super.onPause()
+        val ed: Editor = sharedPreferences.edit()
+        ed.putFloat("balance", balanceAmount)
+        when{
+            balanceAmount > 0F -> ed.putString("color", "black")
+            balanceAmount == 0F -> ed.putString("color", "white")
+            else -> ed.putString("color", "red")
+        }
+        ed.commit()
+    }
 
 }
